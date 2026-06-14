@@ -25,23 +25,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      # 如果你的项目使用 pnpm，需要添加此步骤
+      # 🔧 升级 pnpm 到 v10.33.2（与 package.json 中的 packageManager 保持一致）
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.33.2   # 之前是 9，现在升级
       
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm' # 或 'npm' / 'yarn'
+          cache: 'pnpm'
       
       - name: Install dependencies
-        run: pnpm install # 或 npm ci
+        run: pnpm install
       
       - name: Build project
-        run: pnpm run build # 或 npm run build
+        run: pnpm run build
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # 重要：这里需要改成你项目的构建输出目录，通常是 dist 或 build
+          path: './dist'   # 根据你的实际构建输出目录修改（如 build）
       
       - name: Deploy to GitHub Pages
         id: deployment
